@@ -1,7 +1,13 @@
 const express = require("express");
+
 const router = express.Router();
 
 const projects = [{ id: "1", title: "Novo Projeto", tasks: ["nova tarefa"] }];
+
+router.use((req, res, next) => {
+  console.log(`Quantidade de requisições: ${req.method.count}`);
+  next();
+});
 
 router.post("/", (req, res) => {
   projects.push(req.body);
@@ -9,7 +15,7 @@ router.post("/", (req, res) => {
 });
 
 router.get("/", (req, res) => {
-  res.json(projects);
+  return res.json(projects);
 });
 
 router.put("/:index", (req, res) => {
@@ -17,7 +23,7 @@ router.put("/:index", (req, res) => {
   const { title } = req.body;
 
   projects[index] = title;
-  res.json({ projects });
+  return res.json({ projects });
 });
 
 router.delete("/:index", (req, res) => {
