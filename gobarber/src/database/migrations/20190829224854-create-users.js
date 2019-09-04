@@ -1,4 +1,4 @@
-'use strict';
+
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
@@ -7,40 +7,38 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
         autoIncrement: true,
-        primaryKey: true,        
-      },    
-      name:{
-        type: Sequelize.STRING,
-        allowNull:true,
+        primaryKey: true,
       },
-      email:{
+      name: {
         type: Sequelize.STRING,
         allowNull: true,
-        unique: true
       },
-      password_hash:{
+      email: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: true,
+        unique: true,
       },
-      provider:{
+      password_hash: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      provider: {
         type: Sequelize.BOOLEAN,
         defaultValue: false,
         allowNull: false,
       },
-      created_at:{
-        type: Sequelize.DATE,
-        allowNull: false
-      },
-      updated_at:{
+      created_at: {
         type: Sequelize.DATE,
         allowNull: false,
       },
-    });    
+      updated_at: {
+        type: Sequelize.DATE,
+        allowNull: false,
+      },
+    });
   },
 
-  down: (queryInterface) => {
-
-      return queryInterface.dropTable('users');
-
-  }
+  down: queryInterface => {
+    return queryInterface.dropTable('users');
+  },
 };

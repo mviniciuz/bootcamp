@@ -1,11 +1,10 @@
-import User from '../models/user';
+import User from '../models/User';
 
-class userControlller {
-
-  async store (req, res){
+class UserControlller {
+  async store(req, res) {
     const userExists = await User.findOne({ where: { email: req.body.email } });
-    if (userExists){
-      return res.status(400).json({error:'Usuário já existe'});
+    if (userExists) {
+      return res.status(400).json({ error: 'Usuário já existe' });
     }
 
     const { id, name, email, provider } = await User.create(req.body);
@@ -14,10 +13,9 @@ class userControlller {
       id,
       email,
       name,
-      provider
+      provider,
     });
   }
-
 }
 
-export default  new userControlller();
+export default new UserControlller();
