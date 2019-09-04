@@ -5,9 +5,11 @@ class SessionController {
 
   async store(req, res){ 
     
-    const { email, password } = req.body;    
+    const { email, password } = req.body; 
 
     const user = await User.findOne({ where: { email } });
+
+   return res.send( user );
 
   //  if (!user) {
  //     return res.status(401).json({ error: 'usuário não encontrado!'});
@@ -32,7 +34,7 @@ class SessionController {
  
 //    });
 
-    res.send({ email });
+
   }
 }    
 
